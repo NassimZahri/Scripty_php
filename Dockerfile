@@ -1,9 +1,6 @@
-FROM php:8.2-apache
+FROM nginx:alpine
 
-# Copy website files to Apache document root
-COPY . /var/www/html/
+COPY . /usr/share/nginx/html
 
-# Set permissions (optional, for development)
-RUN chown -R www-data:www-data /var/www/html
-
-EXPOSE 80
+# Overwrite nginx config to use home.html as index
+COPY nginx.conf /etc/nginx/conf.d/default.conf
